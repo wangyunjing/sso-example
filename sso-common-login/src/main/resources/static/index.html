@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+    <form action="/login" method="post">
+        <label>用户名：</label><input type="text" name="userName"><br>
+        <label>密码：</label><input type="password" name="pwd"><br>
+        <input id="redirectUrl" type="hidden" name="redirectUrl">
+        <input id="callback" type="hidden" name="callback">
+        <button type="submit">登陆</button><br>
+        <button type="reset">重置</button>
+    </form>
+
+</body>
+
+<script type="application/javascript">
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+
+    $(function(){
+        $("#redirectUrl").attr("value", getQueryString("redirectUrl"));
+        $("#callback").attr("value", getQueryString("callback"));
+    });
+
+</script>
+</html>
